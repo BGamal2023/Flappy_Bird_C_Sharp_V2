@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using My_Flappy_Bird_C_Sharp_V2.__Globals;
+using My_Flappy_Bird_C_Sharp_V2._A0_Main;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,14 +13,22 @@ using System.Windows.Shapes;
 
 namespace My_Flappy_Bird_C_Sharp_V2
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+  
     public partial class MainWindow : Window
     {
+        #region The Fields
+        private Game_Controller obj_GC=new Game_Controller();
+        #endregion
+        //----------------------------------------------------------------------------------------------------------------------------
         public MainWindow()
         {
+            //----
             InitializeComponent();
+            //----
+            obj_GC.handle_The_Game(this);
+            //----
         }
+        //----------------------------------------------------------------------------------------------------------------------------
+
     }
 }

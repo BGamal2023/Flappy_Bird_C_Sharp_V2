@@ -8,4 +8,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="_Z0_For_Renaming_Folders\" />
+  </ItemGroup>
+
 </Project>
