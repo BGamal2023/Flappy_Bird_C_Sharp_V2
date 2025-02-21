@@ -1,0 +1,9 @@
+﻿<Application x:Class="My_Flappy_Bird_C_Sharp_V2.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:My_Flappy_Bird_C_Sharp_V2"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
