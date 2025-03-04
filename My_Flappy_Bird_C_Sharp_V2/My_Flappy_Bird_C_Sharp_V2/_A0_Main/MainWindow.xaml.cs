@@ -25,10 +25,24 @@ namespace My_Flappy_Bird_C_Sharp_V2
             //----
             InitializeComponent();
             //----
-            obj_GC.handle_The_Game(this);
+            obj_GC.Handle_The_Game(this);
             //----
+            this.KeyDown += onKeyDown;
+            this.KeyUp += onKeyUp;
         }
         //----------------------------------------------------------------------------------------------------------------------------
+        private void onKeyUp(object sender, KeyEventArgs e)
+        {
+            Globals_Player.should_I_Move_Player_Down = true;
+            Globals_Player.should_I_Move_Player_Up = false;
 
+        }
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------
+        private void onKeyDown(object sender, KeyEventArgs e)
+        {
+            Globals_Player.should_I_Move_Player_Up = true;
+            Globals_Player.should_I_Move_Player_Down = false;
+        }
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------
     }
 }

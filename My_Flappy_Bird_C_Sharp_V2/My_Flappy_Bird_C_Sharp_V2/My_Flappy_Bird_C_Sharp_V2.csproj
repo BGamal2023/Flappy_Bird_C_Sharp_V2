@@ -9,6 +9,39 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Photos\background_1.jpg" />
+    <None Remove="Assets\Photos\background_2.jpg" />
+    <None Remove="Assets\Photos\background_3.jpg" />
+    <None Remove="Assets\Photos\background_4.jpg" />
+    <None Remove="Assets\Photos\background_5.jpg" />
+    <None Remove="Assets\Photos\background_6.jpg" />
+    <None Remove="Assets\Photos\background_7.jpg" />
+    <None Remove="Assets\Photos\background_8.jpg" />
+    <None Remove="Assets\Photos\background_9.jpg" />
+    <None Remove="Assets\Photos\bird.png" />
+    <None Remove="Assets\Photos\ground.png" />
+    <None Remove="Assets\Photos\pipe.png" />
+    <None Remove="Assets\Photos\pipedown.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Photos\background_1.jpg" />
+    <Resource Include="Assets\Photos\background_2.jpg" />
+    <Resource Include="Assets\Photos\background_3.jpg" />
+    <Resource Include="Assets\Photos\background_4.jpg" />
+    <Resource Include="Assets\Photos\background_5.jpg" />
+    <Resource Include="Assets\Photos\background_6.jpg" />
+    <Resource Include="Assets\Photos\background_7.jpg" />
+    <Resource Include="Assets\Photos\background_8.jpg" />
+    <Resource Include="Assets\Photos\background_9.jpg" />
+    <Resource Include="Assets\Photos\bird.png" />
+    <Resource Include="Assets\Photos\ground.png" />
+    <Resource Include="Assets\Photos\pipe.png" />
+    <Resource Include="Assets\Photos\pipedown.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="_A8_Player_Life\" />
     <Folder Include="_Z0_For_Renaming_Folders\" />
   </ItemGroup>
 
