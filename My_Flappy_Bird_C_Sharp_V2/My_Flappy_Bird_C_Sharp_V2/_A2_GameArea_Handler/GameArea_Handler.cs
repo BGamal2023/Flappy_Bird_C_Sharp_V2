@@ -70,7 +70,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A2_GameArea_Handler
             //----
         }
         //------------------------------------------------------------------------------------------------------------------------------
-
         private void add_The_GameArea_To_The_MainWindow()
         {
             Globals_MainWindow.mWindow.Content = Globals_GameArea.gameArea;
@@ -122,15 +121,15 @@ namespace My_Flappy_Bird_C_Sharp_V2._A2_GameArea_Handler
         //------------------------------------------------------------------------------------------------------------------------------
         private void get_And_Set_GameArea_Background_Image_V2()
         {
-        
+
             //----
             Image backgroundImage1 = new Image
             {
-                Width = Globals_GameArea.gameArea_W,  
-                Height = Globals_GameArea.gameArea_H   
+                Width = Globals_GameArea.gameArea_W,
+                Height = Globals_GameArea.gameArea_H
             };
             backgroundImage1.Source = new BitmapImage(new Uri("pack://application:,,,/Assets/photos/background_8.jpg"));
-           
+
             Image backgroundImage2 = new Image
             {
                 Width = Globals_GameArea.gameArea_W,  // Set the width of the image
@@ -139,12 +138,12 @@ namespace My_Flappy_Bird_C_Sharp_V2._A2_GameArea_Handler
             backgroundImage2.Source = new BitmapImage(new Uri("pack://application:,,,/Assets/photos/background_8.jpg"));
             //----
 
-            Canvas.SetLeft(backgroundImage1, 0);     
-            Canvas.SetTop(backgroundImage1, 0);      
-            Canvas.SetLeft(backgroundImage2, 800);   
-            Canvas.SetTop(backgroundImage2, 0);      
+            Canvas.SetLeft(backgroundImage1, 0);
+            Canvas.SetTop(backgroundImage1, 0);
+            Canvas.SetLeft(backgroundImage2, 800);
+            Canvas.SetTop(backgroundImage2, 0);
 
-          
+
             Globals_GameArea.gameArea.Children.Add(backgroundImage1);
             Globals_GameArea.gameArea.Children.Add(backgroundImage2);
 
@@ -186,7 +185,35 @@ namespace My_Flappy_Bird_C_Sharp_V2._A2_GameArea_Handler
             // Start the second animation
             storyboard.Children.Add(backgroundAnimation2);
             storyboard.Begin();
-            Globals_GameBackground.background_Storyboard = storyboard;  
+            Globals_GameBackground.background_Storyboard = storyboard;
+        }
+        //------------------------------------------------------------------------------------------------------------------------------
+        private void add_Start_Game_Botton()
+        {
+
+            // Create the Button
+            Button start_Button = new Button();
+            start_Button.Content = "Start";
+            start_Button.Width = 100;
+            start_Button.Height = 50;
+
+            // Set the button's position on the canvas
+            Canvas.SetLeft(start_Button, 100);  // X position
+            Canvas.SetTop(start_Button, 100);   // Y position
+
+            // Set button's appearance (optional)
+            start_Button.Background = Brushes.LightBlue;
+            start_Button.Foreground = Brushes.DarkBlue;
+            start_Button.FontSize = 14;
+
+            Globals_GameArea.gameArea.Children.Add(start_Button);
+            Canvas.SetZIndex(start_Button, 100);
+            start_Button.Click += (sender, e) =>
+            {
+
+
+                start_Button.Visibility = Visibility.Collapsed;
+            };
         }
     }
 }

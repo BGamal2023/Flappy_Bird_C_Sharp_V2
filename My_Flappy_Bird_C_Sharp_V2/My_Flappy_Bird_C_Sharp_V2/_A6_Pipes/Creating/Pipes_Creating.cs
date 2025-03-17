@@ -306,6 +306,10 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
         private void creat_And_Add_The_Pipes_To_GameArea_V1()
         {
             //-------------
+            #region Clear Old List Of Pipes
+            Globals_Pipes.li_Of_Pipes.Clear();  
+            #endregion
+            //-------------
             #region Create 1 up Pipes 
             Image image_Pipe_1_UP = new Image
             {
@@ -385,10 +389,10 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
             #region Create a Storyboard for the animation
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(backgroundAnimation_image_Pipe_1_UP);
-            storyboard.Begin();
+         //   storyboard.Begin();
 
             storyboard.Children.Add(backgroundAnimation_image_Pipe_1_Down);
-            storyboard.Begin();
+          //  storyboard.Begin();
 
             Globals_Pipes.pipes_Storyboard = storyboard;
             #endregion

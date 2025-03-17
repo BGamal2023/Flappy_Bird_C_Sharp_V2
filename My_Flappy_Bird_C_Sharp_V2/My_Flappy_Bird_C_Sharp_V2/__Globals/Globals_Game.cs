@@ -24,5 +24,8 @@ namespace My_Flappy_Bird_C_Sharp_V2.__Globals
 
         public static int zIndex_Score_Lable = 5;
         public static int zIndex_Score_TextBlock = 5;
+
+
+        public static bool does_Start_Button_Pressed=false;
     }
 }

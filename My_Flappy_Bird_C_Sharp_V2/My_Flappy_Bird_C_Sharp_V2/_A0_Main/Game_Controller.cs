@@ -42,6 +42,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         //---------------------------------------------------------------------------------------------------------
         public void Handle_The_Game(Window mWindow)
         {
+            Globals_Collision.does_Collision_Happend = false;
             //----
             Globals_MainWindow.mWindow = mWindow;
             //----
@@ -57,7 +58,9 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             //----
             obj_PL.handle_Creating_Player_Life_Image();
             //----
-            Moving(mWindow);
+            add_The_Start_Button(mWindow);
+            //---
+           // Moving(mWindow);
             //----
         }
 
@@ -83,15 +86,9 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
                 }
                 //- if collision happend do something here.....
 
-                /// 1- stop all moving
                 Globals_GameBackground.background_Storyboard.Stop();
                 Globals_Pipes.pipes_Storyboard.Stop();
-                ///2- add image of lost life 
-                ///3- add 3 buttons 1- for resume ....Exit.....
 
-
-
-                /// bug # i am here ......i will make rectangle add text you lost life ....and put 2 buttons resume ....exit.....
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     Canvas canvas = new Canvas();
@@ -127,7 +124,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
                     // Add the TextBlock to the Canvas
 
 
-                    /// bug # add 2 buttons....
 
                     Button resumeButton = new Button
                     {
@@ -168,15 +164,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
                 });
 
 
-
-
-
-
-
-
-
-
-
             });
             game_Thread.Start();
 
@@ -213,18 +200,56 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             return formattedText.Width;
         }
         //---------------------------------------------------------------------------------------------------------
-
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();  // This will close the application
         }
         //---------------------------------------------------------------------------------------------------------
-
         private void ResumeButton_Click(object sender, RoutedEventArgs e,Window mWindow)
         {
+
+
+           /// bug # i am here ....what should i do befor i invoke the below method
+
             Handle_The_Game(mWindow );
         }
         //---------------------------------------------------------------------------------------------------------
+        private void add_The_Start_Button(Window mWindow)
+        {
+           
 
+            Button startButton = new Button
+            {
+                Content = "Start the Game",
+                Width = 120,
+                Height = 40
+            };
+
+            // Add click event
+            startButton.Click += (s, e) =>
+            {
+                // Remove the button from the canvas
+                Globals_GameArea.gameArea.Children.Remove(startButton);
+
+                // Additional code to execute after button removal
+                Globals_Pipes.pipes_Storyboard.Begin();
+                Globals_GameBackground.background_Storyboard.Begin();
+              Moving(mWindow);
+            };
+
+
+            // Add the button to the Canvas
+            Globals_GameArea.gameArea.Children.Add(startButton);
+
+            // Center the button
+            double canvasWidth = Globals_GameArea.gameArea.Width;
+            double canvasHeight = Globals_GameArea.gameArea.Height;
+            Canvas.SetLeft(startButton, (canvasWidth - startButton.Width) / 2);
+            Canvas.SetTop(startButton, (canvasHeight - startButton.Height) / 2);
+
+
+
+        }
     }
 }
+

@@ -26,6 +26,12 @@ namespace My_Flappy_Bird_C_Sharp_V2._A3_Player
         //-----------------------------------------------------------------------------------------
         private void create_Images_For_Player_Life()
         {
+
+
+
+            #region Clear Old List 
+            Globals_Player.li_Of_Player_Life_Images.Clear();    
+            #endregion
             //----
             for (int i = 0; i < Globals_Player.num_Of_Plyer_Life; i++)
             {

@@ -57,7 +57,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A4_Game_Background
             storyboard.Children.Add(backgroundAnimation);
 
             // Start the animation
-            storyboard.Begin();
+         //   storyboard.Begin();
             Globals_GameBackground.background_Storyboard = storyboard;  
         
     }
