@@ -215,5 +215,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A2_GameArea_Handler
                 start_Button.Visibility = Visibility.Collapsed;
             };
         }
+        //------------------------------------------------------------------------------------------------------------------------------
+
     }
 }
