@@ -182,7 +182,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             Globals_GameBackground.background_Storyboard.Stop();
             Globals_Pipes.pipes_Storyboard.Stop();
 
-              
+              // i will check for game over actions 
            
                 //----
                 Application.Current.Dispatcher.Invoke(() =>
