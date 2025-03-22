@@ -60,37 +60,140 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             //----
             add_The_Start_Button(mWindow);
             //---
-           // Moving(mWindow);
+            // Moving(mWindow);
             //----
         }
-
         //---------------------------------------------------------------------------------------------------------
-        private void Moving(Window mWindow)
+        private void game_Loop(Window mWindow)
         {
+            //----
             Thread game_Thread = new Thread(() =>
             {
-                while (Globals_Collision.does_Collision_Happend == false)
+                Moving();
+
+                Actions_After_Collision(mWindow);
+
+            });
+            //----
+            game_Thread.Start();
+            //----
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void Stop(Window mWindow)
+        {
+
+            Restart(mWindow);
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void Restart(Window mWindow)
+        {
+            game_Loop(mWindow);
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private double GetTextWidth(TextBlock textBlock)
+        {
+            // Create a FormattedText object to measure the text
+            FormattedText formattedText = new FormattedText(
+                textBlock.Text, // The text of the TextBlock
+                System.Globalization.CultureInfo.CurrentCulture,
+                System.Windows.FlowDirection.LeftToRight,
+                new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch),
+                textBlock.FontSize,  // Font size of the text
+                textBlock.Foreground  // Text color (brush)
+            );
+
+            // Return the width of the formatted text
+            return formattedText.Width;
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();  // This will close the application
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void ResumeButton_Click(object sender, RoutedEventArgs e, Window mWindow)
+        {
+
+
+            /// bug # i am here ....what should i do befor i invoke the below method
+
+            Handle_The_Game(mWindow);
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void add_The_Start_Button(Window mWindow)
+        {
+
+
+            Button startButton = new Button
+            {
+                Content = "Start the Game",
+                Width = 120,
+                Height = 40
+            };
+
+            // Add click event
+            startButton.Click += (s, e) =>
+            {
+                // Remove the button from the canvas
+                Globals_GameArea.gameArea.Children.Remove(startButton);
+
+                // Additional code to execute after button removal
+                Globals_Pipes.pipes_Storyboard.Begin();
+                Globals_GameBackground.background_Storyboard.Begin();
+                game_Loop(mWindow);
+            };
+
+
+            // Add the button to the Canvas
+            Globals_GameArea.gameArea.Children.Add(startButton);
+
+            // Center the button
+            double canvasWidth = Globals_GameArea.gameArea.Width;
+            double canvasHeight = Globals_GameArea.gameArea.Height;
+            Canvas.SetLeft(startButton, (canvasWidth - startButton.Width) / 2);
+            Canvas.SetTop(startButton, (canvasHeight - startButton.Height) / 2);
+
+
+
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void Moving()
+        {
+            while (Globals_Collision.does_Collision_Happend == false)
+            {
+                start = DateTime.Now;
+                obj_PMH.handle_The_Moving_Of_The_Player();
+                obj_PipMH.handl_The_Moving_Of_The_Pipes();
+                Globals_Collision.does_Collision_Happend = obj_CH.handle_Player_Collision();
+                //  Globals_GameBackground.background_Storyboard.Stop();
+                end = DateTime.Now;
+
+                diff = end - start;
+                if (diff.TotalMilliseconds < 50)
                 {
-                    start = DateTime.Now;
-                    obj_PMH.handle_The_Moving_Of_The_Player();
-                    obj_PipMH.handl_The_Moving_Of_The_Pipes();
-                    Globals_Collision.does_Collision_Happend = obj_CH.handle_Player_Collision();
-                    //  Globals_GameBackground.background_Storyboard.Stop();
-                    end = DateTime.Now;
-
-                    diff = end - start;
-                    if (diff.TotalMilliseconds < 50)
-                    {
-                        Thread.Sleep((int)(50 - diff.TotalMilliseconds));
-                    }
+                    Thread.Sleep((int)(50 - diff.TotalMilliseconds));
                 }
-                //- if collision happend do something here.....
+            }
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void Actions_After_Collision(Window mWindow)
+        {
+            //----
+            Globals_GameBackground.background_Storyboard.Stop();
+            Globals_Pipes.pipes_Storyboard.Stop();
 
-                Globals_GameBackground.background_Storyboard.Stop();
-                Globals_Pipes.pipes_Storyboard.Stop();
-
+              
+           
+                //----
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    //----
+                    if (Globals_Player.num_Of_Plyer_Life > 0)
+                    {
+                        Globals_Player.num_Of_Plyer_Life -= 1;
+
+                    }
+                    //----
                     Canvas canvas = new Canvas();
                     canvas.Width = 400;
                     canvas.Height = 150;
@@ -108,13 +211,10 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
                     double textWidth = GetTextWidth(textBlock);
 
 
-                    Debug.WriteLine("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%text block width= " + textWidth);
                     // Calculate the left position to center the text horizontally on the Canvas
                     double canvasWidth = canvas.Width;
-                    Debug.WriteLine("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Left Position = " + canvasWidth);
 
                     double leftPosition = (canvasWidth - textWidth) / 2;
-                    Debug.WriteLine("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Left Position = " + leftPosition);
 
                     canvas.Children.Add(textBlock);
 
@@ -148,7 +248,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
                     Canvas.SetTop(resumeButton, 100);
                     // Set the position of "Exit" Button
                     Canvas.SetLeft(exitButton, gap + resumeButton.Width + gap); // Second button at the second gap
-                    Canvas.SetTop(exitButton, 100);  
+                    Canvas.SetTop(exitButton, 100);
                     // Add the buttons to the canvas
                     canvas.Children.Add(resumeButton);
                     canvas.Children.Add(exitButton);
@@ -162,92 +262,13 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
                     Canvas.SetTop(canvas, 100);
                     Canvas.SetZIndex(canvas, 10);
                 });
-
-
-            });
-            game_Thread.Start();
-
-
-
-        }
-
-      
-        //---------------------------------------------------------------------------------------------------------
-        private void Stop(Window mWindow)
-        {
-
-            Restart(mWindow);
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private void Restart(Window mWindow)
-        {
-            Moving(mWindow);
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private double GetTextWidth(TextBlock textBlock)
-        {
-            // Create a FormattedText object to measure the text
-            FormattedText formattedText = new FormattedText(
-                textBlock.Text, // The text of the TextBlock
-                System.Globalization.CultureInfo.CurrentCulture,
-                System.Windows.FlowDirection.LeftToRight,
-                new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch),
-                textBlock.FontSize,  // Font size of the text
-                textBlock.Foreground  // Text color (brush)
-            );
-
-            // Return the width of the formatted text
-            return formattedText.Width;
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();  // This will close the application
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private void ResumeButton_Click(object sender, RoutedEventArgs e,Window mWindow)
-        {
-
-
-           /// bug # i am here ....what should i do befor i invoke the below method
-
-            Handle_The_Game(mWindow );
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private void add_The_Start_Button(Window mWindow)
-        {
+                //----
            
 
-            Button startButton = new Button
-            {
-                Content = "Start the Game",
-                Width = 120,
-                Height = 40
-            };
-
-            // Add click event
-            startButton.Click += (s, e) =>
-            {
-                // Remove the button from the canvas
-                Globals_GameArea.gameArea.Children.Remove(startButton);
-
-                // Additional code to execute after button removal
-                Globals_Pipes.pipes_Storyboard.Begin();
-                Globals_GameBackground.background_Storyboard.Begin();
-              Moving(mWindow);
-            };
-
-
-            // Add the button to the Canvas
-            Globals_GameArea.gameArea.Children.Add(startButton);
-
-            // Center the button
-            double canvasWidth = Globals_GameArea.gameArea.Width;
-            double canvasHeight = Globals_GameArea.gameArea.Height;
-            Canvas.SetLeft(startButton, (canvasWidth - startButton.Width) / 2);
-            Canvas.SetTop(startButton, (canvasHeight - startButton.Height) / 2);
-
-
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void gameOver_Actions()
+        {
 
         }
     }
