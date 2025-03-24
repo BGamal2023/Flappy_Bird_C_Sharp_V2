@@ -7,6 +7,7 @@ using My_Flappy_Bird_C_Sharp_V2._A5_Score;
 using My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating;
 using My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Moving;
 using My_Flappy_Bird_C_Sharp_V2._A7_Collision;
+using My_Flappy_Bird_C_Sharp_V2._A9_Messages.Resume_Message;
 using My_Flappy_Bird_C_Sharp_V2.General;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         private Collision_Handler obj_CH = new Collision_Handler();
         private Player_Life obj_PL = new Player_Life();
         private My_Image_Class obj_IC = new My_Image_Class();
+        private C_Resume_Message obj_Res_Mess = new C_Resume_Message();
         #endregion
         //---------------------------------------------------------------------------------------------------------
         public void Handle_The_Game(Window mWindow)
@@ -182,8 +184,13 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             Globals_GameBackground.background_Storyboard.Stop();
             Globals_Pipes.pipes_Storyboard.Stop();
 
-              // i will check for game over actions 
-           
+            // i will check for game over actions 
+            if (Globals_Player.li_Of_Player_Life_Images.Count < 1)
+            {
+
+            }
+            else
+            {
                 //----
                 Application.Current.Dispatcher.Invoke(() =>
                 {
@@ -194,76 +201,18 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
 
                     }
                     //----
-                    Canvas canvas = new Canvas();
-                    canvas.Width = 400;
-                    canvas.Height = 150;
-                    canvas.Background = Brushes.Aqua;
-
-                    // Create a TextBlock to display text
-                    TextBlock textBlock = new TextBlock
-                    {
-                        Text = "You Lost Life!", // Set your text
-                        FontSize = 24,               // Set font size
-                        Foreground = Brushes.Black,   // Set text color
-                        FontWeight = FontWeights.Bold // Set font weight
-                    };
-
-                    double textWidth = GetTextWidth(textBlock);
-
-
-                    // Calculate the left position to center the text horizontally on the Canvas
-                    double canvasWidth = canvas.Width;
-
-                    double leftPosition = (canvasWidth - textWidth) / 2;
-
-                    canvas.Children.Add(textBlock);
-
-                    Canvas.SetLeft(textBlock, leftPosition);
-                    Canvas.SetTop(textBlock, 20);  // Set Y position
-
-                    // Add the TextBlock to the Canvas
+                    obj_Res_Mess.handle_Resume_Message_After_Collision(mWindow);
+                    Globals_Buttons.resumeButton.Click += (sender, e) => ResumeButton_Click(sender, e, mWindow); // Handler for Resume Button click
+                    Globals_Buttons.exitButton.Click += ExitButton_Click;      // Handler for Exit Button click
+                    //-----
 
 
 
-                    Button resumeButton = new Button
-                    {
-                        Content = "Resume",
-                        Width = 50,   // Button width
-                        Height = 30   // Button height
-                    };
-
-                    // Create "Exit" Button
-                    Button exitButton = new Button
-                    {
-                        Content = "Exit",
-                        Width = 50,   // Button width
-                        Height = 30   // Button height
-                    };
-
-                    // Calculate the left positions of the buttons to ensure they are evenly distributed
-                    double gap = (canvas.Width - 2 * resumeButton.Width) / 3;
-
-                    // Set the position of "Resume" Button
-                    Canvas.SetLeft(resumeButton, gap); // First button at the gap
-                    Canvas.SetTop(resumeButton, 100);
-                    // Set the position of "Exit" Button
-                    Canvas.SetLeft(exitButton, gap + resumeButton.Width + gap); // Second button at the second gap
-                    Canvas.SetTop(exitButton, 100);
-                    // Add the buttons to the canvas
-                    canvas.Children.Add(resumeButton);
-                    canvas.Children.Add(exitButton);
-
-                    resumeButton.Click += (sender, e) => ResumeButton_Click(sender, e, mWindow); // Handler for Resume Button click
-                    exitButton.Click += ExitButton_Click;      // Handler for Exit Button click
-
-
-                    Globals_GameArea.gameArea.Children.Add(canvas);
-                    Canvas.SetLeft(canvas, 200);
-                    Canvas.SetTop(canvas, 100);
-                    Canvas.SetZIndex(canvas, 10);
                 });
                 //----
-           
+            }
+
+
 
         }
         //---------------------------------------------------------------------------------------------------------

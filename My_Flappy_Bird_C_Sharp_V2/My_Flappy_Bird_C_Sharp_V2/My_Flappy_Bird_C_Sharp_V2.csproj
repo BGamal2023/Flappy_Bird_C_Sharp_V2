@@ -42,6 +42,8 @@
 
   <ItemGroup>
     <Folder Include="_A8_Player_Life\" />
+    <Folder Include="_A9_Messages\GameOver_Message\" />
+    <Folder Include="_A9_Messages\Message\" />
     <Folder Include="_Z0_For_Renaming_Folders\" />
   </ItemGroup>
 
