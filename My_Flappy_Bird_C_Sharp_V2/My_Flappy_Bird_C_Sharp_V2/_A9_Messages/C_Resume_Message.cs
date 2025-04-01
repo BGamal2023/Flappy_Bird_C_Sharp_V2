@@ -8,12 +8,17 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
 
-namespace My_Flappy_Bird_C_Sharp_V2._A9_Messages.Resume_Message
+namespace My_Flappy_Bird_C_Sharp_V2._A9_Messages
 {
-    internal class C_Resume_Message
+    internal class C_Resume_Message : I_Message
     {
         #region The Fields
         #endregion
+        //-----------------------------------------------------------------------------------------------------------------------------------------------
+        public void Run(Window mWindow)
+        {
+            handle_Resume_Message_After_Collision(mWindow);
+        }
         //-----------------------------------------------------------------------------------------------------------------------------------------------
         public void handle_Resume_Message_After_Collision(Window mWindow)
         {
@@ -65,8 +70,8 @@ namespace My_Flappy_Bird_C_Sharp_V2._A9_Messages.Resume_Message
             };
 
 
-            Globals_Buttons.resumeButton=resumeButton;
-            Globals_Buttons.exitButton=exitButton;  
+            Globals_Buttons.resumeButton = resumeButton;
+            Globals_Buttons.exitButton = exitButton;
 
             // Calculate the left positions of the buttons to ensure they are evenly distributed
             double gap = (canvas.Width - 2 * resumeButton.Width) / 3;
@@ -81,7 +86,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A9_Messages.Resume_Message
             canvas.Children.Add(resumeButton);
             canvas.Children.Add(exitButton);
 
-           
+
 
 
             Globals_GameArea.gameArea.Children.Add(canvas);
@@ -106,6 +111,5 @@ namespace My_Flappy_Bird_C_Sharp_V2._A9_Messages.Resume_Message
             return formattedText.Width;
         }
         //---------------------------------------------------------------------------------------------------------
-       
-    }
+}
 }

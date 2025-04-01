@@ -11,6 +11,7 @@ namespace My_Flappy_Bird_C_Sharp_V2.__Globals
     {
 
         public static Button resumeButton = new Button();
+        public static Button playAgain_Button= new Button();    
 
         public static Button exitButton = new Button();
 

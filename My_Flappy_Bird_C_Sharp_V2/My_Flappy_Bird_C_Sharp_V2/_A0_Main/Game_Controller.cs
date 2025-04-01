@@ -7,7 +7,7 @@ using My_Flappy_Bird_C_Sharp_V2._A5_Score;
 using My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating;
 using My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Moving;
 using My_Flappy_Bird_C_Sharp_V2._A7_Collision;
-using My_Flappy_Bird_C_Sharp_V2._A9_Messages.Resume_Message;
+using My_Flappy_Bird_C_Sharp_V2._A9_Messages;
 using My_Flappy_Bird_C_Sharp_V2.General;
 using System;
 using System.Collections.Generic;
@@ -39,7 +39,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         private Collision_Handler obj_CH = new Collision_Handler();
         private Player_Life obj_PL = new Player_Life();
         private My_Image_Class obj_IC = new My_Image_Class();
-        private C_Resume_Message obj_Res_Mess = new C_Resume_Message();
         #endregion
         //---------------------------------------------------------------------------------------------------------
         public void Handle_The_Game(Window mWindow)
@@ -90,22 +89,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         private void Restart(Window mWindow)
         {
             game_Loop(mWindow);
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private double GetTextWidth(TextBlock textBlock)
-        {
-            // Create a FormattedText object to measure the text
-            FormattedText formattedText = new FormattedText(
-                textBlock.Text, // The text of the TextBlock
-                System.Globalization.CultureInfo.CurrentCulture,
-                System.Windows.FlowDirection.LeftToRight,
-                new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch),
-                textBlock.FontSize,  // Font size of the text
-                textBlock.Foreground  // Text color (brush)
-            );
-
-            // Return the width of the formatted text
-            return formattedText.Width;
         }
         //---------------------------------------------------------------------------------------------------------
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -185,9 +168,14 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             Globals_Pipes.pipes_Storyboard.Stop();
 
             // i will check for game over actions 
-            if (Globals_Player.li_Of_Player_Life_Images.Count < 1)
+            if (Globals_Player.li_Of_Player_Life_Images.Count == 1)
             {
+                C_GameOver_Message obj_GOM= new C_GameOver_Message();
+                Globals_Messages.current_Message = obj_GOM;
+                Globals_Messages.current_Message.Run(mWindow);
 
+                Globals_Buttons.playAgain_Button.Click += (sender, e) => playAgain_Button_Click(sender, e, mWindow); // Handler for Resume Button click
+                Globals_Buttons.exitButton.Click += ExitButton_Click;      // Handler for Exit Button click
             }
             else
             {
@@ -201,7 +189,11 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
 
                     }
                     //----
-                    obj_Res_Mess.handle_Resume_Message_After_Collision(mWindow);
+                    C_Resume_Message obj_RM=new C_Resume_Message();
+
+                    Globals_Messages.current_Message =obj_RM;
+                    Globals_Messages.current_Message.Run(mWindow);
+                //    obj_Res_Mess.handle_Resume_Message_After_Collision(mWindow);
                     Globals_Buttons.resumeButton.Click += (sender, e) => ResumeButton_Click(sender, e, mWindow); // Handler for Resume Button click
                     Globals_Buttons.exitButton.Click += ExitButton_Click;      // Handler for Exit Button click
                     //-----
@@ -216,8 +208,19 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
 
         }
         //---------------------------------------------------------------------------------------------------------
-        private void gameOver_Actions()
+        private void playAgain_Button_Click(object sender, RoutedEventArgs e, Window mWindow)
         {
+            gameOver_Actions(mWindow);
+        }
+
+        //---------------------------------------------------------------------------------------------------------
+        private void gameOver_Actions(Window mWindow)
+        {
+            ///bug ...fill this method
+            Globals_Player.num_Of_Plyer_Life = 3;
+            // let score =0;'
+            Handle_The_Game(mWindow);
+
 
         }
     }
