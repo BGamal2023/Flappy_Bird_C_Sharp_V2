@@ -27,5 +27,7 @@ namespace My_Flappy_Bird_C_Sharp_V2.__Globals
 
 
         public static bool does_Start_Button_Pressed=false;
+
+        public static bool anybool=false;
     }
 }
