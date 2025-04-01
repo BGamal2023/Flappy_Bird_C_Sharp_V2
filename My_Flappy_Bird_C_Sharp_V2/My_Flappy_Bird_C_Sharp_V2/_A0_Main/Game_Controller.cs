@@ -144,13 +144,24 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         //---------------------------------------------------------------------------------------------------------
         private void Moving()
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            int score = 0;
+            long lastUpdateTime = 0; // To track the last score update time
+
             while (Globals_Collision.does_Collision_Happend == false)
             {
                 start = DateTime.Now;
                 obj_PMH.handle_The_Moving_Of_The_Player();
                 obj_PipMH.handl_The_Moving_Of_The_Pipes();
                 Globals_Collision.does_Collision_Happend = obj_CH.handle_Player_Collision();
-                //  Globals_GameBackground.background_Storyboard.Stop();
+
+                if (stopwatch.ElapsedMilliseconds - lastUpdateTime >= )
+                {
+                    score++;
+                    lastUpdateTime = stopwatch.ElapsedMilliseconds; // Update last update time
+                }
                 end = DateTime.Now;
 
                 diff = end - start;
