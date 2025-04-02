@@ -59,8 +59,8 @@ namespace My_Flappy_Bird_C_Sharp_V2._A3_Player
                 //----
                 Globals_GameArea.gameArea.Children.Add(Globals_Player.img_Player);
                 //----
-                double centerX = Globals_GameArea.gameArea.Width * 0.25;
-                double centerY = (Globals_GameArea.gameArea.Height - Globals_Player.img_Player.Height) / 2;
+                double centerX = Globals_Player.player_Left_Pos;
+                double centerY = Globals_Player.player_Top_Pos;
                 //----
                 Canvas.SetLeft(Globals_Player.img_Player, centerX);
                 Canvas.SetTop(Globals_Player.img_Player, centerY);

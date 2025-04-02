@@ -152,7 +152,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
                 obj_PMH.handle_The_Moving_Of_The_Player();
                 obj_PipMH.handl_The_Moving_Of_The_Pipes();
                 Globals_Collision.does_Collision_Happend = obj_CH.handle_Player_Collision();
-                obj_SH.handle_Player_Score();
+                obj_SH.handle_Score_Of_The_Player();
 
                 end = DateTime.Now;
 

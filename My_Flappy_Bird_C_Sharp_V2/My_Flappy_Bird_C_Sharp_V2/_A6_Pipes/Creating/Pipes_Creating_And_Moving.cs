@@ -368,11 +368,11 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
                 From = 1200,               // Starting position
                 To = -400,              // Move the image completely off-screen to the left
                 Duration = new Duration(TimeSpan.FromSeconds(Globals_Pipes.pipes_Timer_Tick_duration)), // Duration of the animation
-             //   RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
+                RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
                 AutoReverse = false     // No reverse, we want continuous scrolling
             };
 
-         
+
 
             #endregion
             //-------------
@@ -391,7 +391,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(backgroundAnimation_image_Pipe_1_UP);
             storyboard.Children.Add(backgroundAnimation_image_Pipe_1_Down);
-            storyboard.Completed += (s, e) => Storyboard_Completed(s, e);
+           // storyboard.Completed += (s, e) => Storyboard_Completed(s, e);
 
             Globals_Pipes.pipes_Storyboard = storyboard;
             #endregion
@@ -404,7 +404,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
             Debug.WriteLine("story completed");
             Debug.WriteLine("****************************************************************");
             Globals_Pipes.does_Player_Pass_Pipe = true;
-            Globals_Pipes.pipes_Storyboard.Begin();
         }
         //--------------------------------------------------------------------------------------------------------------------------
     }
