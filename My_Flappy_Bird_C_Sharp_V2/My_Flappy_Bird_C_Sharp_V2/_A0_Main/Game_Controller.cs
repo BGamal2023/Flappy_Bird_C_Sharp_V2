@@ -221,7 +221,9 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         {
             ///bug ...fill this method
             Globals_Player.num_Of_Plyer_Life = 3;
-            // let score =0;'
+            Globals_Game.Score = 0;
+            Globals_Game.scoreTextBlock.Text = $"{Globals_Game.Score}";
+            
             Handle_The_Game(mWindow);
 
 

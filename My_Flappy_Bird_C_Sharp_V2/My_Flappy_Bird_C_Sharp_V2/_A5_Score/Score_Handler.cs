@@ -18,6 +18,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A5_Score
         private HashSet<Image> scoredPipes = new HashSet<Image>(); // Keep track of scored pipes
         private DateTime lastScoreTime = DateTime.Now; // Track last score update
         bool any1 = false;
+        private List<Image> new_List= new List<Image>();    
 
         #endregion
         /// bug #7 ...change the position of invoking the increasing score from pipe moving handler class to on run method
@@ -132,10 +133,10 @@ namespace My_Flappy_Bird_C_Sharp_V2._A5_Score
             {
 
 
+                new_List= Globals_Pipes.li_Of_Pipes.ToList();   
 
-                scoredPipes.Clear();
 
-                for (int i = 0; i < Globals_Pipes.li_Of_Pipes.Count; i++)
+                for (int i = 0; i < new_List.Count; i++)
                 {
                     //----
                     Image i_Pipe = Globals_Pipes.li_Of_Pipes[i];
@@ -143,8 +144,8 @@ namespace My_Flappy_Bird_C_Sharp_V2._A5_Score
                     //----
 
                     if (i_Pipe_Left < Globals_Player.player_Left_Pos &&
-                       i_Pipe_Left + i_Pipe_Left + Globals_Pipes.width_Of_Pipe > Globals_Player.player_Left_Pos &&
-                    any1 == false)
+                        i_Pipe_Left + Globals_Pipes.width_Of_Pipe > Globals_Player.player_Left_Pos &&
+                        any1 == false)
                     {
                         any1 = true;
 
@@ -154,7 +155,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A5_Score
                         scoredPipes.Add(i_Pipe); // Mark pipe as scored
                     }
 
-                    if (i_Pipe_Left + i_Pipe_Left + Globals_Pipes.width_Of_Pipe < Globals_Player.player_Left_Pos
+                    if (i_Pipe_Left + Globals_Pipes.width_Of_Pipe < Globals_Player.player_Left_Pos
                      && !scoredPipes.Contains(i_Pipe))
                     {
                         any1 = false;
@@ -165,6 +166,8 @@ namespace My_Flappy_Bird_C_Sharp_V2._A5_Score
 
 
 
+                Debug.WriteLine("***********************************************************************");
+                Debug.WriteLine(" any1 = " + any1);
 
 
 
