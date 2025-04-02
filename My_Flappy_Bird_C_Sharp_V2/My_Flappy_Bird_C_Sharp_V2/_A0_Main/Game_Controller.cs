@@ -30,7 +30,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         private Player_Creation obj_PC = new Player_Creation();
         private Plyer_Moving_Handler obj_PMH = new Plyer_Moving_Handler();
         private DispatcherTimer game_Dispatcher_Timer = new DispatcherTimer();
-        private Score_Handler obj_SH = new Score_Handler();
         private Pipes_Creating_And_Moving obj_PiPC = new Pipes_Creating_And_Moving();
         private Pipes_Moving_Handler obj_PipMH = new Pipes_Moving_Handler();
         private DateTime start;
@@ -39,6 +38,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         private Collision_Handler obj_CH = new Collision_Handler();
         private Player_Life obj_PL = new Player_Life();
         private My_Image_Class obj_IC = new My_Image_Class();
+        private Score_GM obj_SGM= new Score_GM();   
         #endregion
         //---------------------------------------------------------------------------------------------------------
         public void Handle_The_Game(Window mWindow)
@@ -53,7 +53,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             //---
             obj_PC.handle_The_Player();
             //----
-            obj_SH.add_Score_To_GameArea();
+            obj_SGM.handle_Creating_The_Score_In_GameArea();    
             //----
             obj_PiPC.handle_Creating_And_Adding_The_Pipes_To_GameArea();
             //----
@@ -152,9 +152,9 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
                 obj_PMH.handle_The_Moving_Of_The_Player();
                 obj_PipMH.handl_The_Moving_Of_The_Pipes();
                 Globals_Collision.does_Collision_Happend = obj_CH.handle_Player_Collision();
-                obj_SH.handle_Score_Of_The_Player();
+                obj_SGM.handle_Increasing_The_Score_During_Playing();   
 
-                end = DateTime.Now;
+                  end = DateTime.Now;
 
                 diff = end - start;
                 if (diff.TotalMilliseconds < 50)
@@ -215,7 +215,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         {
             gameOver_Actions(mWindow);
         }
-
         //---------------------------------------------------------------------------------------------------------
         private void gameOver_Actions(Window mWindow)
         {
