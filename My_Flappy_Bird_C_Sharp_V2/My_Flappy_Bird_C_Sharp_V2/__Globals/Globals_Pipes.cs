@@ -33,10 +33,10 @@ namespace Flying_Bird_C_.__Globals
         public static Storyboard pipes_Storyboard = new Storyboard();
 
 
-        public static int timer_Tick_duration = 4;
+        public static int pipes_Timer_Tick_duration = 4;
 
 
-
+      
 
 
 
