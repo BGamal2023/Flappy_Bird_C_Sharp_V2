@@ -1,6 +1,8 @@
-﻿using My_Flappy_Bird_C_Sharp_V2.__Globals;
+﻿using Flying_Bird_C_.__Globals;
+using My_Flappy_Bird_C_Sharp_V2.__Globals;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +24,20 @@ namespace My_Flappy_Bird_C_Sharp_V2._A5_Score
             add_Score_Label_On_The_GameArea();
         }
         //---------------------------------------------------------------------------------------------------------------------------
-        public static void IncreaseScore()
+        public void handle_Player_Score()
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                //----
-                Globals_Game.Score++;
-                //----
-                Globals_Game.scoreTextBlock.Text = $"{Globals_Game.Score}";
-                //----
+                if (Globals_Pipes.does_Player_Pass_Pipe == true)
+                {
+                    //----
+                    Globals_Game.Score++;
+                    //----
+                    Globals_Game.scoreTextBlock.Text = $"{Globals_Game.Score}";
+                    //----
+                    Globals_Pipes.does_Player_Pass_Pipe=false;
+                }
+
             });
           
         }
@@ -85,9 +92,20 @@ namespace My_Flappy_Bird_C_Sharp_V2._A5_Score
             //----
         }
         //--------------------------------------------------------------------------------------------------------------------------
-        public void handle_Score_Of_The_Player()
+        private void handle_Score_Of_The_Player()
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            int counter = 0;
 
+          
+                if (stopwatch.ElapsedMilliseconds >= 4)
+                {
+                    counter++;
+                    Console.WriteLine($"Counter: {counter}");
+                    stopwatch.Restart();  // Reset stopwatch to measure next 4ms
+                }
+            }
         }
-    }
+    
 }

@@ -90,7 +90,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Moving
                 //----
             }
             //----
-            Score_Handler.IncreaseScore();
+          //  Score_Handler.handle_Player_Score();
             //----
 
         }

@@ -31,7 +31,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         private Plyer_Moving_Handler obj_PMH = new Plyer_Moving_Handler();
         private DispatcherTimer game_Dispatcher_Timer = new DispatcherTimer();
         private Score_Handler obj_SH = new Score_Handler();
-        private Pipes_Creating obj_PiPC = new Pipes_Creating();
+        private Pipes_Creating_And_Moving obj_PiPC = new Pipes_Creating_And_Moving();
         private Pipes_Moving_Handler obj_PipMH = new Pipes_Moving_Handler();
         private DateTime start;
         private DateTime end;
@@ -144,11 +144,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         //---------------------------------------------------------------------------------------------------------
         private void Moving()
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            int score = 0;
-            long lastUpdateTime = 0; // To track the last score update time
+            
 
             while (Globals_Collision.does_Collision_Happend == false)
             {
@@ -156,12 +152,8 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
                 obj_PMH.handle_The_Moving_Of_The_Player();
                 obj_PipMH.handl_The_Moving_Of_The_Pipes();
                 Globals_Collision.does_Collision_Happend = obj_CH.handle_Player_Collision();
+                obj_SH.handle_Player_Score();
 
-                if (stopwatch.ElapsedMilliseconds - lastUpdateTime >= )
-                {
-                    score++;
-                    lastUpdateTime = stopwatch.ElapsedMilliseconds; // Update last update time
-                }
                 end = DateTime.Now;
 
                 diff = end - start;

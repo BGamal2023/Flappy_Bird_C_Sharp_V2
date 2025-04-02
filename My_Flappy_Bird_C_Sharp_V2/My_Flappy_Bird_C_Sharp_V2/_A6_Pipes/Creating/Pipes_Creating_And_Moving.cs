@@ -1,5 +1,6 @@
 ﻿using Flying_Bird_C_.__Globals;
 using My_Flappy_Bird_C_Sharp_V2.__Globals;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -7,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
 {
-    internal class Pipes_Creating
+    internal class Pipes_Creating_And_Moving
     {
         #region Fields
 
@@ -367,11 +368,11 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
                 From = 1200,               // Starting position
                 To = -400,              // Move the image completely off-screen to the left
                 Duration = new Duration(TimeSpan.FromSeconds(Globals_Pipes.pipes_Timer_Tick_duration)), // Duration of the animation
-                RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
+             //   RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
                 AutoReverse = false     // No reverse, we want continuous scrolling
             };
 
-
+         
 
             #endregion
             //-------------
@@ -389,15 +390,21 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
             #region Create a Storyboard for the animation
             Storyboard storyboard = new Storyboard();
             storyboard.Children.Add(backgroundAnimation_image_Pipe_1_UP);
-            //   storyboard.Begin();
-
             storyboard.Children.Add(backgroundAnimation_image_Pipe_1_Down);
-            //  storyboard.Begin();
+            storyboard.Completed += (s, e) => Storyboard_Completed(s, e);
 
             Globals_Pipes.pipes_Storyboard = storyboard;
             #endregion
             //-------------
 
+        }
+        //--------------------------------------------------------------------------------------------------------------------------
+        private void Storyboard_Completed(object? sender, EventArgs e)
+        {
+            Debug.WriteLine("story completed");
+            Debug.WriteLine("****************************************************************");
+            Globals_Pipes.does_Player_Pass_Pipe = true;
+            Globals_Pipes.pipes_Storyboard.Begin();
         }
         //--------------------------------------------------------------------------------------------------------------------------
     }
