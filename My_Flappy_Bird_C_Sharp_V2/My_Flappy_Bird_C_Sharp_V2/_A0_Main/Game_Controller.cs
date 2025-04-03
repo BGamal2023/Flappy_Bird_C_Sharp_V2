@@ -8,6 +8,7 @@ using My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating;
 using My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Moving;
 using My_Flappy_Bird_C_Sharp_V2._A7_Collision;
 using My_Flappy_Bird_C_Sharp_V2._A9_Messages;
+using My_Flappy_Bird_C_Sharp_V2._B1_Levels;
 using My_Flappy_Bird_C_Sharp_V2.General;
 using System;
 using System.Collections.Generic;
@@ -38,11 +39,16 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         private Collision_Handler obj_CH = new Collision_Handler();
         private Player_Life obj_PL = new Player_Life();
         private My_Image_Class obj_IC = new My_Image_Class();
-        private Score_GM obj_SGM= new Score_GM();   
+        private Score_GM obj_SGM = new Score_GM();
+        private Level_Achieved_Message obj_LAM = new Level_Achieved_Message();
+        private Levels_Controller obj_LC = new Levels_Controller();
+        private Level_1 obj_L1 = new Level_1();
+     
         #endregion
         //---------------------------------------------------------------------------------------------------------
         public void Handle_The_Game(Window mWindow)
         {
+            //----
             Globals_Collision.does_Collision_Happend = false;
             //----
             Globals_MainWindow.mWindow = mWindow;
@@ -53,7 +59,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             //---
             obj_PC.handle_The_Player();
             //----
-            obj_SGM.handle_Creating_The_Score_In_GameArea();    
+            obj_SGM.handle_Creating_The_Score_In_GameArea();
             //----
             obj_PiPC.handle_Creating_And_Adding_The_Pipes_To_GameArea();
             //----
@@ -70,10 +76,14 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             //----
             Thread game_Thread = new Thread(() =>
             {
+                Globals_Levels.current_Level.Run();
+                //----
                 Moving();
-
+                //----
                 Actions_After_Collision(mWindow);
-
+                //----
+                Actions_After_Level_Score_Reached(mWindow);
+                //----
             });
             //----
             game_Thread.Start();
@@ -98,10 +108,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         //---------------------------------------------------------------------------------------------------------
         private void ResumeButton_Click(object sender, RoutedEventArgs e, Window mWindow)
         {
-
-
-            /// bug # i am here ....what should i do befor i invoke the below method
-
             Handle_The_Game(mWindow);
         }
         //---------------------------------------------------------------------------------------------------------
@@ -144,17 +150,17 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         //---------------------------------------------------------------------------------------------------------
         private void Moving()
         {
-            
-
-            while (Globals_Collision.does_Collision_Happend == false)
+            while (Globals_Collision.does_Collision_Happend == false
+                    && Globals_Levels.did_The_Player_Achieve_The_Level_Target == false)
             {
                 start = DateTime.Now;
                 obj_PMH.handle_The_Moving_Of_The_Player();
                 obj_PipMH.handl_The_Moving_Of_The_Pipes();
                 Globals_Collision.does_Collision_Happend = obj_CH.handle_Player_Collision();
-                obj_SGM.handle_Increasing_The_Score_During_Playing();   
+                obj_SGM.handle_Increasing_The_Score_During_Playing();
+                obj_LC.monitor_The_Score();
 
-                  end = DateTime.Now;
+                end = DateTime.Now;
 
                 diff = end - start;
                 if (diff.TotalMilliseconds < 50)
@@ -169,16 +175,15 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             //----
             Globals_GameBackground.background_Storyboard.Stop();
             Globals_Pipes.pipes_Storyboard.Stop();
-
             // i will check for game over actions 
             if (Globals_Player.li_Of_Player_Life_Images.Count == 1)
             {
-                C_GameOver_Message obj_GOM= new C_GameOver_Message();
+                C_GameOver_Message obj_GOM = new C_GameOver_Message();
                 Globals_Messages.current_Message = obj_GOM;
                 Globals_Messages.current_Message.Run(mWindow);
 
-                Globals_Buttons.playAgain_Button.Click += (sender, e) => playAgain_Button_Click(sender, e, mWindow); // Handler for Resume Button click
-                Globals_Buttons.exitButton.Click += ExitButton_Click;      // Handler for Exit Button click
+                Globals_Buttons.btn_playAgain.Click += (sender, e) => playAgain_Button_Click(sender, e, mWindow); // Handler for Resume Button click
+                Globals_Buttons.btn_Exit_The_Game.Click += ExitButton_Click;      // Handler for Exit Button click
             }
             else
             {
@@ -189,26 +194,18 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
                     if (Globals_Player.num_Of_Plyer_Life > 0)
                     {
                         Globals_Player.num_Of_Plyer_Life -= 1;
-
                     }
                     //----
-                    C_Resume_Message obj_RM=new C_Resume_Message();
+                    C_Resume_Message obj_RM = new C_Resume_Message();
 
-                    Globals_Messages.current_Message =obj_RM;
+                    Globals_Messages.current_Message = obj_RM;
                     Globals_Messages.current_Message.Run(mWindow);
-                //    obj_Res_Mess.handle_Resume_Message_After_Collision(mWindow);
-                    Globals_Buttons.resumeButton.Click += (sender, e) => ResumeButton_Click(sender, e, mWindow); // Handler for Resume Button click
-                    Globals_Buttons.exitButton.Click += ExitButton_Click;      // Handler for Exit Button click
+                    Globals_Buttons.btn_Resume.Click += (sender, e) => ResumeButton_Click(sender, e, mWindow); // Handler for Resume Button click
+                    Globals_Buttons.btn_Exit_The_Game.Click += ExitButton_Click;      // Handler for Exit Button click
                     //-----
-
-
-
                 });
                 //----
             }
-
-
-
         }
         //---------------------------------------------------------------------------------------------------------
         private void playAgain_Button_Click(object sender, RoutedEventArgs e, Window mWindow)
@@ -222,10 +219,47 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             Globals_Player.num_Of_Plyer_Life = 3;
             Globals_Game.Score = 0;
             Globals_Game.scoreTextBlock.Text = $"{Globals_Game.Score}";
-            
+
             Handle_The_Game(mWindow);
 
 
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void Actions_After_Level_Score_Reached(Window mWindow)
+        {
+            if (Globals_Levels.did_The_Player_Achieve_The_Level_Target)
+            {
+                //----
+                Globals_GameBackground.background_Storyboard.Stop();
+                Globals_Pipes.pipes_Storyboard.Stop();
+                //----
+                // show message >>with buttons callbacks >>>> go to next level ...repeat current level .....Exit>>>>>.
+                obj_LAM.handle_Level_Success_Message(mWindow);
+                Globals_Buttons.btn_Repeat_Same_Level.Click += (sender, e) => btn_Repeat_Same_Level_Click(sender, e, mWindow);
+                Globals_Buttons.btn_Next_Level.Click += (sender, e) => btn_Next_Level_Click(sender, e, mWindow);
+
+                //----
+            }
+
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void btn_Repeat_Same_Level_Click(object sender, RoutedEventArgs e, Window mWindow)
+        {
+
+            gameOver_Actions(mWindow);
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void btn_Next_Level_Click(object sender, RoutedEventArgs e, Window mWindow)
+        {
+            obj_LC.increase_Level_Num();
+            obj_LC.detetc_The_Level();  
+            Globals_Levels.current_Level.Run();
+            Handle_The_Game(mWindow);
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void start_With_Level_1()
+        {
+          
         }
     }
 }

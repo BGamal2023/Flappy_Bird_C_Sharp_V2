@@ -237,7 +237,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
             {
                 From = 800,               // Starting position
                 To = 0,              // Move the image completely off-screen to the left
-                Duration = new Duration(TimeSpan.FromSeconds(Globals_GameBackground.timer_Tick_duration)), // Duration of the animation
+                Duration = new Duration(TimeSpan.FromMilliseconds(Globals_GameBackground.background_timer_Tick_duration)), // Duration of the animation
                 RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
                 AutoReverse = false     // No reverse, we want continuous scrolling
             };
@@ -246,7 +246,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
             {
                 From = 860,               // Starting position
                 To = 60,              // Move the image completely off-screen to the left
-                Duration = new Duration(TimeSpan.FromSeconds(Globals_GameBackground.timer_Tick_duration)), // Duration of the animation
+                Duration = new Duration(TimeSpan.FromMilliseconds(Globals_GameBackground.background_timer_Tick_duration)), // Duration of the animation
                 RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
                 AutoReverse = false     // No reverse, we want continuous scrolling
             };
@@ -256,7 +256,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
             {
                 From = 920,               // Starting position
                 To = 120,              // Move the image completely off-screen to the left
-                Duration = new Duration(TimeSpan.FromSeconds(Globals_GameBackground.timer_Tick_duration)), // Duration of the animation
+                Duration = new Duration(TimeSpan.FromMilliseconds(Globals_GameBackground.background_timer_Tick_duration)), // Duration of the animation
                 RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
                 AutoReverse = false     // No reverse, we want continuous scrolling
             };
@@ -266,7 +266,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
             {
                 From = 980,               // Starting position
                 To = 180,              // Move the image completely off-screen to the left
-                Duration = new Duration(TimeSpan.FromSeconds(Globals_GameBackground.timer_Tick_duration)), // Duration of the animation
+                Duration = new Duration(TimeSpan.FromMilliseconds(Globals_GameBackground.background_timer_Tick_duration)), // Duration of the animation
                 RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
                 AutoReverse = false     // No reverse, we want continuous scrolling
             };
@@ -358,7 +358,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
             {
                 From = 800,               // Starting position
                 To = -800,              // Move the image completely off-screen to the left
-                Duration = new Duration(TimeSpan.FromSeconds(Globals_Pipes.pipes_Timer_Tick_duration)), // Duration of the animation
+                Duration = new Duration(TimeSpan.FromMilliseconds(Globals_Pipes.pipes_Timer_Tick_duration)), // Duration of the animation
                 RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
                 AutoReverse = false     // No reverse, we want continuous scrolling
             };
@@ -367,7 +367,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Creating
             {
                 From = 1200,               // Starting position
                 To = -400,              // Move the image completely off-screen to the left
-                Duration = new Duration(TimeSpan.FromSeconds(Globals_Pipes.pipes_Timer_Tick_duration)), // Duration of the animation
+                Duration = new Duration(TimeSpan.FromMilliseconds(Globals_Pipes.pipes_Timer_Tick_duration)), // Duration of the animation
                 RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
                 AutoReverse = false     // No reverse, we want continuous scrolling
             };

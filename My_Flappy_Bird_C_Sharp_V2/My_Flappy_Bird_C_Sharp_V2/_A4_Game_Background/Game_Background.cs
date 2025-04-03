@@ -13,7 +13,9 @@ namespace My_Flappy_Bird_C_Sharp_V2._A4_Game_Background
 {
     internal class Game_Background
     {
+       
         #region The Fields
+
         #endregion
         //-------------------------------------------------------------------------------------------------------------------------
         public void handl_The_Game_Background()
@@ -29,7 +31,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A4_Game_Background
             backgroundImage.Height = 450;
 
             // Set the source of the image (change the URI to match your background image location)
-            backgroundImage.Source = new BitmapImage(new Uri("pack://application:,,,/Assets/photos/background_3.jpg"));
+            backgroundImage.Source = Globals_GameBackground.bmi_Background_GameArea;
 
             // Add the background image to the Canvas
             Globals_GameArea.gameArea.Children.Add(backgroundImage);
@@ -43,7 +45,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A4_Game_Background
             {
                 From = 0,                // Starting position (initial position)
                 To = -800,               // Ending position (move the image off-screen to the left)
-                Duration = new Duration(TimeSpan.FromSeconds(Globals_GameBackground.timer_Tick_duration)), // Duration of the animation
+                Duration = new Duration(TimeSpan.FromMilliseconds(Globals_GameBackground.background_timer_Tick_duration)), // Duration of the animation
                 RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
                 AutoReverse = false      // Don't reverse the animation
             };

@@ -70,8 +70,8 @@ namespace My_Flappy_Bird_C_Sharp_V2._A9_Messages
             };
 
 
-            Globals_Buttons.resumeButton = resumeButton;
-            Globals_Buttons.exitButton = exitButton;
+            Globals_Buttons.btn_Resume = resumeButton;
+            Globals_Buttons.btn_Exit_The_Game = exitButton;
 
             // Calculate the left positions of the buttons to ensure they are evenly distributed
             double gap = (canvas.Width - 2 * resumeButton.Width) / 3;

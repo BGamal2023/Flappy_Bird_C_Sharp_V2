@@ -81,8 +81,8 @@ namespace My_Flappy_Bird_C_Sharp_V2._A9_Messages
                 };
 
 
-                Globals_Buttons.playAgain_Button = playAgain_Button;
-                Globals_Buttons.exitButton = exit_Game_Button;
+                Globals_Buttons.btn_playAgain = playAgain_Button;
+                Globals_Buttons.btn_Exit_The_Game = exit_Game_Button;
 
                 // Calculate the left positions of the buttons to ensure they are evenly distributed
                 double gap = (gameOver_Canvas.Width - 2 * playAgain_Button.Width) / 3;

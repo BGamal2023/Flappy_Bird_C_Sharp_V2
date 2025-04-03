@@ -128,14 +128,14 @@ namespace My_Flappy_Bird_C_Sharp_V2._A2_GameArea_Handler
                 Width = Globals_GameArea.gameArea_W,
                 Height = Globals_GameArea.gameArea_H
             };
-            backgroundImage1.Source = new BitmapImage(new Uri("pack://application:,,,/Assets/photos/background_8.jpg"));
+            backgroundImage1.Source =Globals_GameBackground.bmi_Background_GameArea;
 
             Image backgroundImage2 = new Image
             {
                 Width = Globals_GameArea.gameArea_W,  // Set the width of the image
                 Height = Globals_GameArea.gameArea_H
             };
-            backgroundImage2.Source = new BitmapImage(new Uri("pack://application:,,,/Assets/photos/background_8.jpg"));
+            backgroundImage2.Source = Globals_GameBackground.bmi_Background_GameArea;
             //----
 
             Canvas.SetLeft(backgroundImage1, 0);
@@ -152,7 +152,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A2_GameArea_Handler
             {
                 From = 0,               // Starting position
                 To = -800,              // Move the image completely off-screen to the left
-                Duration = new Duration(TimeSpan.FromSeconds(Globals_GameBackground.timer_Tick_duration)), // Duration of the animation
+                Duration = new Duration(TimeSpan.FromMilliseconds(Globals_GameBackground.background_timer_Tick_duration)), // Duration of the animation
                 RepeatBehavior = RepeatBehavior.Forever, // Make the animation repeat forever
                 AutoReverse = false     // No reverse, we want continuous scrolling
             };
@@ -173,7 +173,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A2_GameArea_Handler
             {
                 From = 800,           // Starting position for the second image (just after the first image)
                 To = 0,               // Move it to the left edge (same path as the first image)
-                Duration = new Duration(TimeSpan.FromSeconds(Globals_GameBackground.timer_Tick_duration)),
+                Duration = new Duration(TimeSpan.FromMilliseconds(Globals_GameBackground.background_timer_Tick_duration)),
                 RepeatBehavior = RepeatBehavior.Forever,
                 AutoReverse = false
             };

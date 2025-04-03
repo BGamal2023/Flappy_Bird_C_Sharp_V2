@@ -1,5 +1,6 @@
 ﻿using My_Flappy_Bird_C_Sharp_V2.__Globals;
 using My_Flappy_Bird_C_Sharp_V2._A0_Main;
+using My_Flappy_Bird_C_Sharp_V2._B1_Levels;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,12 +19,15 @@ namespace My_Flappy_Bird_C_Sharp_V2
     {
         #region The Fields
         private Game_Controller obj_GC=new Game_Controller();
+        private Level_1 obj_L1=new Level_1();
         #endregion
         //----------------------------------------------------------------------------------------------------------------------------
         public MainWindow()
         {
             //----
             InitializeComponent();
+            //----
+            start_The_Game_With_Level_1();  
             //----
             obj_GC.Handle_The_Game(this);
             //----
@@ -44,5 +48,10 @@ namespace My_Flappy_Bird_C_Sharp_V2
             Globals_Player.should_I_Move_Player_Down = false;
         }
         //------------------------------------------------------------------------------------------------------------------------------------------------------------
+        private void start_The_Game_With_Level_1()
+        {
+            Globals_Levels.current_Level = obj_L1;
+            Globals_Levels.current_Level.Run();
+        }
     }
 }
