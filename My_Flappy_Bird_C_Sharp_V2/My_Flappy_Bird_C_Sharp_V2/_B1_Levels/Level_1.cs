@@ -22,9 +22,8 @@ namespace My_Flappy_Bird_C_Sharp_V2._B1_Levels
             {
 
 
-                Globals_Pipes.pipes_Timer_Tick_duration = 2000;
+                Globals_Pipes.pipes_Timer_Tick_duration = 4000;
                 Globals_GameBackground.background_timer_Tick_duration = 2000;
-
 
                 //--------------------------------------
                 Globals_Levels.current_Level_No = 1;

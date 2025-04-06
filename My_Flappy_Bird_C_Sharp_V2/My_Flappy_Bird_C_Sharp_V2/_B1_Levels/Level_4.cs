@@ -15,11 +15,12 @@ namespace My_Flappy_Bird_C_Sharp_V2._B1_Levels
     {
         public void Run()
         {
-        
+
             Application.Current.Dispatcher.Invoke(() =>
             {
-                Globals_Pipes.pipes_Timer_Tick_duration = 4;
-                Globals_GameBackground.background_timer_Tick_duration = 2;
+                Globals_GameBackground.background_timer_Tick_duration = 2800;
+                Globals_Pipes.pipes_Timer_Tick_duration = 1400;
+                Globals_Player.player_Moving_Step = 60;
 
                 //--------------------------------------
                 Globals_Levels.current_Level_No = 4;
@@ -54,7 +55,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._B1_Levels
                 Globals_Pipes.starting_Left = Globals_GameArea.gameArea.Width - 200;
                 Globals_Pipes.pipes_Moving_Step = 10;
                 Globals_Pipes.does_Player_Pass_Pipe = false;
-               
+
                 //--------------------------------------
                 Globals_Levels.level_No_Lable_W = 30;
                 Globals_Levels.level_No_Lable_H = 20;
