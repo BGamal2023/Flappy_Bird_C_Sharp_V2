@@ -19,6 +19,7 @@
     <None Remove="Assets\Photos\background_8.jpg" />
     <None Remove="Assets\Photos\background_9.jpg" />
     <None Remove="Assets\Photos\bird.png" />
+    <None Remove="Assets\Photos\enemy.png" />
     <None Remove="Assets\Photos\ground.png" />
     <None Remove="Assets\Photos\pipe.png" />
     <None Remove="Assets\Photos\pipedown.png" />
@@ -35,6 +36,7 @@
     <Resource Include="Assets\Photos\background_8.jpg" />
     <Resource Include="Assets\Photos\background_9.jpg" />
     <Resource Include="Assets\Photos\bird.png" />
+    <Resource Include="Assets\Photos\enemy.png" />
     <Resource Include="Assets\Photos\ground.png" />
     <Resource Include="Assets\Photos\pipe.png" />
     <Resource Include="Assets\Photos\pipedown.png" />

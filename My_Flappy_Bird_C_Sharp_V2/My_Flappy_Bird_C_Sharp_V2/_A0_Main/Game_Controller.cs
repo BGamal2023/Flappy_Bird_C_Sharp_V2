@@ -9,6 +9,7 @@ using My_Flappy_Bird_C_Sharp_V2._A6_Pipes.Moving;
 using My_Flappy_Bird_C_Sharp_V2._A7_Collision;
 using My_Flappy_Bird_C_Sharp_V2._A9_Messages;
 using My_Flappy_Bird_C_Sharp_V2._B1_Levels;
+using My_Flappy_Bird_C_Sharp_V2._B2_The_Features;
 using My_Flappy_Bird_C_Sharp_V2.General;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         private Level_Achieved_Message obj_LAM = new Level_Achieved_Message();
         private Levels_Controller obj_LC = new Levels_Controller();
         private Level_1 obj_L1 = new Level_1();
+        private Enemies obj_Enemy=new Enemies();
      
         #endregion
         //---------------------------------------------------------------------------------------------------------
@@ -58,6 +60,8 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             obj_GAH.handle_The_GameArea();
             //---
             obj_PC.handle_The_Player();
+            //----
+            obj_Enemy.creat_Add_Enemy_To_GameArea();    
             //----
             obj_SGM.handle_Creating_The_Score_In_GameArea();
             //----
