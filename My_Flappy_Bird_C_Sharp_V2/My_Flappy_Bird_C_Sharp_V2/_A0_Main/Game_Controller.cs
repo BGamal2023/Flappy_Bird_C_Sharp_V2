@@ -44,8 +44,8 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         private Level_Achieved_Message obj_LAM = new Level_Achieved_Message();
         private Levels_Controller obj_LC = new Levels_Controller();
         private Level_1 obj_L1 = new Level_1();
-        private Enemies obj_Enemy=new Enemies();
-     
+        private Enemies obj_Enemy = new Enemies();
+
         #endregion
         //---------------------------------------------------------------------------------------------------------
         public void Handle_The_Game(Window mWindow)
@@ -59,9 +59,9 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             //---
             obj_GAH.handle_The_GameArea();
             //---
-            obj_PC.handle_The_Player();
+            obj_PC.creat_And_Add_The_Player_To_The_GameArea();
             //----
-            obj_Enemy.creat_Add_Enemy_To_GameArea();    
+            obj_Enemy.creat_Add_Enemy_To_GameArea();
             //----
             obj_SGM.handle_Creating_The_Score_In_GameArea();
             //----
@@ -158,7 +158,15 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
                     && Globals_Levels.did_The_Player_Achieve_The_Level_Target == false)
             {
                 start = DateTime.Now;
-                obj_PMH.handle_The_Moving_Of_The_Player();
+                // obj_PMH.handle_The_Moving_Of_The_Player_V0();
+              
+
+                    obj_PMH.handle_The_Moving_Of_The_Player_V1(
+                         Globals_Player.player_Moving_Step,
+                         Globals_Player.player_Moving_Step,
+                         Globals_Player.img_Player);
+
+  
                 obj_PipMH.handl_The_Moving_Of_The_Pipes();
                 Globals_Collision.does_Collision_Happend = obj_CH.handle_Player_Collision();
                 obj_SGM.handle_Increasing_The_Score_During_Playing();
@@ -256,14 +264,14 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         private void btn_Next_Level_Click(object sender, RoutedEventArgs e, Window mWindow)
         {
             obj_LC.increase_Level_Num();
-            obj_LC.detetc_The_Level();  
+            obj_LC.detetc_The_Level();
             Globals_Levels.current_Level.Run();
             Handle_The_Game(mWindow);
         }
         //---------------------------------------------------------------------------------------------------------
         private void start_With_Level_1()
         {
-          
+
         }
     }
 }

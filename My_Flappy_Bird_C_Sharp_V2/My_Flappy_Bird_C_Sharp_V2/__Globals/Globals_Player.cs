@@ -25,7 +25,8 @@ namespace My_Flappy_Bird_C_Sharp_V2.__Globals
         public static bool should_Plyer_Move_Up = false;
         public static bool should_Plyer_Move_Down = true;
 
-     
+        public static string asset_Path = "pack://application:,,,/Assets/Photos/bird.png";
+
         public static DispatcherTimer player_Moving_Timer=new DispatcherTimer();
         public static int player_Moving_Timer_Tick_Duration = 100;
 
