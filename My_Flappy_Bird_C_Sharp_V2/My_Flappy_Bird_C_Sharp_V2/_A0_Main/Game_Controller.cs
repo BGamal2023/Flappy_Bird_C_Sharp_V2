@@ -48,7 +48,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
 
         #endregion
         //---------------------------------------------------------------------------------------------------------
-        public void Handle_The_Game(Window mWindow)
+        public void draw_TheGameArea_And_Add_The_Other_Components(Window mWindow)
         {
             //----
             Globals_Collision.does_Collision_Happend = false;
@@ -73,46 +73,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             //---
             // Moving(mWindow);
             //----
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private void game_Loop(Window mWindow)
-        {
-            //----
-            Thread game_Thread = new Thread(() =>
-            {
-                Globals_Levels.current_Level.Run();
-                //----
-                Moving();
-                //----
-                Actions_After_Collision(mWindow);
-                //----
-                Actions_After_Level_Score_Reached(mWindow);
-                //----
-            });
-            //----
-            game_Thread.Start();
-            //----
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private void Stop(Window mWindow)
-        {
-
-            Restart(mWindow);
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private void Restart(Window mWindow)
-        {
-            game_Loop(mWindow);
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();  // This will close the application
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private void ResumeButton_Click(object sender, RoutedEventArgs e, Window mWindow)
-        {
-            Handle_The_Game(mWindow);
         }
         //---------------------------------------------------------------------------------------------------------
         private void add_The_Start_Button(Window mWindow)
@@ -152,6 +112,25 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
 
         }
         //---------------------------------------------------------------------------------------------------------
+        private void game_Loop(Window mWindow)
+        {
+            //----
+            Thread game_Thread = new Thread(() =>
+            {
+                Globals_Levels.current_Level.Run();
+                //----
+                Moving();
+                //----
+                Actions_After_Collision(mWindow);
+                //----
+                Actions_After_Level_Score_Reached(mWindow);
+                //----
+            });
+            //----
+            game_Thread.Start();
+            //----
+        }
+        //---------------------------------------------------------------------------------------------------------
         private void Moving()
         {
             while (Globals_Collision.does_Collision_Happend == false
@@ -159,16 +138,17 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             {
                 start = DateTime.Now;
                 // obj_PMH.handle_The_Moving_Of_The_Player_V0();
-              
 
-                    obj_PMH.handle_The_Moving_Of_The_Player_V1(
-                         Globals_Player.player_Moving_Step,
-                         Globals_Player.player_Moving_Step,
-                         Globals_Player.img_Player);
 
-  
+                obj_PMH.handle_The_Moving_Of_The_Player_V1(
+                     Globals_Player.player_Moving_Step,
+                     Globals_Player.player_Moving_Step,
+                     Globals_Player.img_Player);
+
+
                 obj_PipMH.handl_The_Moving_Of_The_Pipes();
-                Globals_Collision.does_Collision_Happend = obj_CH.handle_Player_Collision();
+                //  Globals_Collision.does_Collision_Happend = obj_CH.handle_Player_Collision();
+                obj_CH.handle_Player_Collision_V1();
                 obj_SGM.handle_Increasing_The_Score_During_Playing();
                 obj_LC.monitor_The_Score();
 
@@ -184,57 +164,40 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         //---------------------------------------------------------------------------------------------------------
         private void Actions_After_Collision(Window mWindow)
         {
-            //----
-            Globals_GameBackground.background_Storyboard.Stop();
-            Globals_Pipes.pipes_Storyboard.Stop();
-            // i will check for game over actions 
-            if (Globals_Player.li_Of_Player_Life_Images.Count == 1)
-            {
-                C_GameOver_Message obj_GOM = new C_GameOver_Message();
-                Globals_Messages.current_Message = obj_GOM;
-                Globals_Messages.current_Message.Run(mWindow);
-
-                Globals_Buttons.btn_playAgain.Click += (sender, e) => playAgain_Button_Click(sender, e, mWindow); // Handler for Resume Button click
-                Globals_Buttons.btn_Exit_The_Game.Click += ExitButton_Click;      // Handler for Exit Button click
-            }
-            else
+            if (Globals_Collision.does_Collision_Happend)
             {
                 //----
-                Application.Current.Dispatcher.Invoke(() =>
+                Globals_GameBackground.background_Storyboard.Stop();
+                Globals_Pipes.pipes_Storyboard.Stop();
+                if (Globals_Player.li_Of_Player_Life_Images.Count == 1)
+                {
+                    C_GameOver_Message obj_GOM = new C_GameOver_Message();
+                    Globals_Messages.current_Message = obj_GOM;
+                    Globals_Messages.current_Message.Run(mWindow);
+                    Globals_Buttons.btn_playAgain.Click += (sender, e) => playAgain_Button_Click(sender, e, mWindow); // Handler for Resume Button click
+                    Globals_Buttons.btn_Exit_The_Game.Click += ExitButton_Click;      // Handler for Exit Button click
+                }
+                else
                 {
                     //----
-                    if (Globals_Player.num_Of_Plyer_Life > 0)
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                        Globals_Player.num_Of_Plyer_Life -= 1;
-                    }
+                        //----
+                        if (Globals_Player.num_Of_Plyer_Life > 0)
+                        {
+                            Globals_Player.num_Of_Plyer_Life -= 1;
+                        }
+                        //----
+                        C_Resume_Message obj_RM = new C_Resume_Message();
+
+                        Globals_Messages.current_Message = obj_RM;
+                        Globals_Messages.current_Message.Run(mWindow);
+                        Globals_Buttons.btn_Resume.Click += (sender, e) => ResumeButton_Click(sender, e, mWindow); // Handler for Resume Button click
+                        Globals_Buttons.btn_Exit_The_Game.Click += ExitButton_Click;      // Handler for Exit Button click
+                    });
                     //----
-                    C_Resume_Message obj_RM = new C_Resume_Message();
-
-                    Globals_Messages.current_Message = obj_RM;
-                    Globals_Messages.current_Message.Run(mWindow);
-                    Globals_Buttons.btn_Resume.Click += (sender, e) => ResumeButton_Click(sender, e, mWindow); // Handler for Resume Button click
-                    Globals_Buttons.btn_Exit_The_Game.Click += ExitButton_Click;      // Handler for Exit Button click
-                    //-----
-                });
-                //----
+                }
             }
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private void playAgain_Button_Click(object sender, RoutedEventArgs e, Window mWindow)
-        {
-            gameOver_Actions(mWindow);
-        }
-        //---------------------------------------------------------------------------------------------------------
-        private void gameOver_Actions(Window mWindow)
-        {
-            ///bug ...fill this method
-            Globals_Player.num_Of_Plyer_Life = 3;
-            Globals_Game.Score = 0;
-            Globals_Game.scoreTextBlock.Text = $"{Globals_Game.Score}";
-
-            Handle_The_Game(mWindow);
-
-
         }
         //---------------------------------------------------------------------------------------------------------
         private void Actions_After_Level_Score_Reached(Window mWindow)
@@ -255,6 +218,38 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
 
         }
         //---------------------------------------------------------------------------------------------------------
+        private void playAgain_Button_Click(object sender, RoutedEventArgs e, Window mWindow)
+        {
+            gameOver_Actions(mWindow);
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();  // This will close the application
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void ResumeButton_Click(object sender, RoutedEventArgs e, Window mWindow)
+        {
+            draw_TheGameArea_And_Add_The_Other_Components(mWindow);
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void Restart(Window mWindow)
+        {
+            game_Loop(mWindow);
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void gameOver_Actions(Window mWindow)
+        {
+            ///bug ...fill this method
+            Globals_Player.num_Of_Plyer_Life = 3;
+            Globals_Game.Score = 0;
+            Globals_Game.scoreTextBlock.Text = $"{Globals_Game.Score}";
+
+            draw_TheGameArea_And_Add_The_Other_Components(mWindow);
+
+
+        }
+        //---------------------------------------------------------------------------------------------------------
         private void btn_Repeat_Same_Level_Click(object sender, RoutedEventArgs e, Window mWindow)
         {
 
@@ -266,12 +261,18 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
             obj_LC.increase_Level_Num();
             obj_LC.detetc_The_Level();
             Globals_Levels.current_Level.Run();
-            Handle_The_Game(mWindow);
+            draw_TheGameArea_And_Add_The_Other_Components(mWindow);
         }
         //---------------------------------------------------------------------------------------------------------
         private void start_With_Level_1()
         {
 
+        }
+        //---------------------------------------------------------------------------------------------------------
+        private void Stop(Window mWindow)
+        {
+
+            Restart(mWindow);
         }
     }
 }

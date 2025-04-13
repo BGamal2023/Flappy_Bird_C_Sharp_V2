@@ -29,7 +29,7 @@ namespace My_Flappy_Bird_C_Sharp_V2
             //----
             start_The_Game_With_Level_1();  
             //----
-            obj_GC.Handle_The_Game(this);
+            obj_GC.draw_TheGameArea_And_Add_The_Other_Components(this);
             //----
             this.KeyDown += onKeyDown;
             this.KeyUp += onKeyUp;

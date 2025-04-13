@@ -35,6 +35,33 @@ namespace My_Flappy_Bird_C_Sharp_V2._A7_Collision
             return false;
             //----
         }
+        //---------------------------------------------------------------------------------------------------------------
+        public void handle_Player_Collision_V1()
+        {
+            //----
+            if (Globals_Player.img_Player == null)
+            {
+                Globals_Collision.does_Collision_Happend= false;
+            }
+            //----
+            foreach (Image i_Pipe in Globals_Pipes.li_Of_Pipes.ToList())
+            {
+                //----
+                bool collision = 
+                    does_Collision_Happend(
+                        Globals_Player.img_Player,
+                        i_Pipe);
+                //----
+                if (collision)
+                {
+                    Globals_Collision.does_Collision_Happend= true;
+                }
+                //----
+            }
+            //----
+          
+          
+        }
         //----------------------------------------------------------------------------------------------------------------
         private bool does_Collision_Happend(Image image1, Image image2)
         {
@@ -60,5 +87,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A7_Collision
             //----
         }
         //---------------------------------------------------------------------------------------------------------------
+       
     }
 }

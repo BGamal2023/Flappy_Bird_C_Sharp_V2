@@ -11,7 +11,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._B2_The_Features
     internal class Enemies
     {
         #region The Fields
-       private creating_And_Adding_Image_T0_GameArea obj_CAITGA = new creating_And_Adding_Image_T0_GameArea();
+       private Creating_And_Adding_Image_To_GameArea_G obj_CAITGA = new Creating_And_Adding_Image_To_GameArea_G();
         #endregion
         //----------------------------------------------------------------------------------------------------------------------------------------------------
         public void creat_Add_Enemy_To_GameArea()

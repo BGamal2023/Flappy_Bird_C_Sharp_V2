@@ -15,7 +15,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A3_Player
     internal class Player_Creation
     {
         #region Fields
-        private creating_And_Adding_Image_T0_GameArea obj_CAAITGA=new creating_And_Adding_Image_T0_GameArea ();
+        private Creating_And_Adding_Image_To_GameArea_G obj_CAAITGA=new Creating_And_Adding_Image_To_GameArea_G ();
         #endregion
         //-------------------------------------------------------------------------------------------------------------
         public void creat_And_Add_The_Player_To_The_GameArea()

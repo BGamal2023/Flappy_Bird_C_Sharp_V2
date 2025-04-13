@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 
 namespace My_Flappy_Bird_C_Sharp_V2.General
 {
-    internal class creating_And_Adding_Image_T0_GameArea
+    internal class Creating_And_Adding_Image_To_GameArea_G
     {
         public void create_Set_Add_Image_To_GameArea(
             double width,

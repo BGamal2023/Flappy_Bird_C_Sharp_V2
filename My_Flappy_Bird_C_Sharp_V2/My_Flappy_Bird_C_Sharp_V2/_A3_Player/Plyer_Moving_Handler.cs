@@ -37,7 +37,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A3_Player
                 up_Moving_Step,
                  image);
             //----
-
         }
         //---------------------------------------------------------------------------------------------------------------------
         private void move_The_Player_Up()
@@ -50,7 +49,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A3_Player
                     top -= Globals_Player.player_Moving_Step;
 
                     Canvas.SetTop(Globals_Player.img_Player, top);
-
                 });
             }
         }
@@ -66,7 +64,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A3_Player
 
                     Canvas.SetTop(Globals_Player.img_Player, top);
                 });
-
             }
         }
         //---------------------------------------------------------------------------------------------------------------------
@@ -79,7 +76,6 @@ namespace My_Flappy_Bird_C_Sharp_V2._A3_Player
                 obj_MI.move_The_Image_Up(
                 up_Moving_Step,
                image);
-
             }
         }
         //---------------------------------------------------------------------------------------------------------------------
@@ -93,10 +89,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A3_Player
                 down_Moving_Step,
                image);
 
-
             }
-
-
         }
     }
 }
