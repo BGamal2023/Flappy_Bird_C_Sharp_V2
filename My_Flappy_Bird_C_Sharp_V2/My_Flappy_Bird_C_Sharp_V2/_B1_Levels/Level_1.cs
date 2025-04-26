@@ -30,7 +30,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._B1_Levels
                 Globals_Levels.current_Level_No = 1;
                 Globals_Levels.previous_Level_No = 1;
                 Globals_Levels.next_Level_No = 2;
-                Globals_Levels.current_Level_Score = 10;
+                Globals_Levels.current_Level_Score = 15;
                 Globals_Levels.Level_No = 1;
                 //--------------------------------------
                 Globals_MainWindow.mWindow_W = 800;

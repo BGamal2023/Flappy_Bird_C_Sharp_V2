@@ -7,11 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace My_Flappy_Bird_C_Sharp_V2._A7_Collision
 {
     internal class Collision_Handler
     {
+        #region The Fields
+        private bool is_Pipes_Collision_Detected = false;
+        private bool is_Ground_Collision_Detected = false;
+        #endregion 
         //---------------------------------------------------------------------------------------------------------------
         public bool handle_Player_Collision()
         {

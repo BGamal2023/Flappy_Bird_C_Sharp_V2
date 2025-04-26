@@ -45,6 +45,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
         private Levels_Controller obj_LC = new Levels_Controller();
         private Level_1 obj_L1 = new Level_1();
         private Enemies obj_Enemy = new Enemies();
+        private Moving_Enemies obj_ME = new Moving_Enemies();
 
         #endregion
         //---------------------------------------------------------------------------------------------------------
@@ -147,6 +148,15 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
 
 
                 obj_PipMH.handl_The_Moving_Of_The_Pipes();
+                //----
+                obj_ME.handle_The_Moving_Of_The_Enemy(
+                    Globals_Enemies.enemy_Moving_Step,
+                      Globals_Enemies.enemy_Moving_Step,
+                        Globals_Enemies.enemy_Moving_Step,
+                          Globals_Enemies.enemy_Moving_Step,
+                         Globals_Enemies.enemy_Image,
+                         Globals_GameArea.gameArea);
+                //----
                 //  Globals_Collision.does_Collision_Happend = obj_CH.handle_Player_Collision();
                 obj_CH.handle_Player_Collision_V1();
                 obj_SGM.handle_Increasing_The_Score_During_Playing();
@@ -274,6 +284,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A0_Main
 
             Restart(mWindow);
         }
+        //---------------------------------------------------------------------------------------------------------
     }
 }
 
