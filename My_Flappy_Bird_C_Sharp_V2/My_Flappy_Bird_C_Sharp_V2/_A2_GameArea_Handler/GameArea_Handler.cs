@@ -1,4 +1,5 @@
 ﻿using My_Flappy_Bird_C_Sharp_V2.__Globals;
+using My_Flappy_Bird_C_Sharp_V2._B3_Ground;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A2_GameArea_Handler
     internal class GameArea_Handler
     {
         #region The Fields
+        private Ground obj_Gro = new Ground();
         #endregion
         //------------------------------------------------------------------------------------------------------------------------------
         public void handle_The_GameArea()
@@ -26,6 +28,8 @@ namespace My_Flappy_Bird_C_Sharp_V2._A2_GameArea_Handler
             //----
             set_The_Background_Color();
             //---
+            obj_Gro.create_And_Add_Ground_To_The_GameArea();
+            //----
             get_And_Set_GameArea_Background_Image_V2();
             //----
             add_The_GameArea_To_The_MainWindow();
@@ -128,7 +132,7 @@ namespace My_Flappy_Bird_C_Sharp_V2._A2_GameArea_Handler
                 Width = Globals_GameArea.gameArea_W,
                 Height = Globals_GameArea.gameArea_H
             };
-            backgroundImage1.Source =Globals_GameBackground.bmi_Background_GameArea;
+            backgroundImage1.Source = Globals_GameBackground.bmi_Background_GameArea;
 
             Image backgroundImage2 = new Image
             {

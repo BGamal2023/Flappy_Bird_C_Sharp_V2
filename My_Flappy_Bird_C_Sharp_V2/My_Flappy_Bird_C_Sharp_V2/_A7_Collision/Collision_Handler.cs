@@ -14,84 +14,36 @@ namespace My_Flappy_Bird_C_Sharp_V2._A7_Collision
     internal class Collision_Handler
     {
         #region The Fields
-        private bool is_Pipes_Collision_Detected = false;
-        private bool is_Ground_Collision_Detected = false;
-        #endregion 
-        //---------------------------------------------------------------------------------------------------------------
-        public bool handle_Player_Collision()
-        {
-            //----
-            if (Globals_Player.img_Player == null)
-            {
-                return false;
-            }
-            //----
-            ///bug #6 ...i added .ToList().....
-            //----
-            foreach (Image i_Pipe in Globals_Pipes.li_Of_Pipes.ToList())
-            {
-                bool collision = does_Collision_Happend(Globals_Player.img_Player, i_Pipe);
-                if (collision)
-                {
-                    return true;
-                }
-            }
-            //----
-            return false;
-            //----
-        }
-        //---------------------------------------------------------------------------------------------------------------
-        public void handle_Player_Collision_V1()
-        {
-            //----
-            if (Globals_Player.img_Player == null)
-            {
-                Globals_Collision.does_Collision_Happend= false;
-            }
-            //----
-            foreach (Image i_Pipe in Globals_Pipes.li_Of_Pipes.ToList())
-            {
-                //----
-                bool collision = 
-                    does_Collision_Happend(
-                        Globals_Player.img_Player,
-                        i_Pipe);
-                //----
-                if (collision)
-                {
-                    Globals_Collision.does_Collision_Happend= true;
-                }
-                //----
-            }
-            //----
-          
-          
-        }
-        //----------------------------------------------------------------------------------------------------------------
-        private bool does_Collision_Happend(Image image1, Image image2)
-        {
-            //----
-            bool does_Thread_Finished = false;
-            Rect rect1;
-            Rect rect2;
-            //----
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                rect1 = new Rect(Canvas.GetLeft(image1), Canvas.GetTop(image1), image1.ActualWidth, image1.ActualHeight);
-                rect2 = new Rect(Canvas.GetLeft(image2), Canvas.GetTop(image2), image2.ActualWidth, image2.ActualHeight);
+        private Collision_With_Pipes obj_CWP = new Collision_With_Pipes();
+        private Collision_With_Enemies obj_CWE = new Collision_With_Enemies();
+        private Collision_With_Ground obj_CWG = new Collision_With_Ground();
+        private bool is_Collision_With_Any_Pipe_Detected = false;
+        private bool is_Collision_With_The_Ground_Detected = false;
+        private bool is_Collision_With_The_Enemy_Detected = false;
+        #endregion
 
-                does_Thread_Finished = true;
-            });
+        //---------------------------------------------------------------------------------------------------------------
+        public void handle_Player_Collision()
+        {
             //----
-            while (!does_Thread_Finished)
+            if (Globals_Player.img_Player == null)
             {
-                Thread.Sleep(50);
+                Globals_Collision.does_Collision_Happend = false;
+                return;
             }
             //----
-            return rect1.IntersectsWith(rect2);
+            is_Collision_With_Any_Pipe_Detected =
+                obj_CWP.is_Collison_With_Any_Pipe_Detected();
+            is_Collision_With_The_Enemy_Detected =
+                obj_CWE.check_Collision_With_The_Enemy();
+            is_Collision_With_The_Ground_Detected =
+                obj_CWG.is_Ground_Collison_Detected();
+            //----
+            Globals_Collision.does_Collision_Happend =
+                is_Collision_With_The_Ground_Detected ||
+                is_Collision_With_Any_Pipe_Detected ||
+                is_Collision_With_The_Enemy_Detected;
             //----
         }
-        //---------------------------------------------------------------------------------------------------------------
-       
     }
 }

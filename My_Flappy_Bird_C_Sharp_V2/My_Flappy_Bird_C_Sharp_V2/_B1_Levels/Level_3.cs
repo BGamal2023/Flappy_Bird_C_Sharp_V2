@@ -57,6 +57,12 @@ namespace My_Flappy_Bird_C_Sharp_V2._B1_Levels
                 Globals_Pipes.pipes_Moving_Step = 10;
                 Globals_Pipes.does_Player_Pass_Pipe = false;
                 //--------------------------------------
+                Globals_Ground.ground_H = 200;
+                Globals_Ground.ground_W = Globals_GameArea.gameArea_W;
+                Globals_Ground.ground_zIndex = 1;
+                Globals_Ground.ground_Left_Pos = 0;
+                Globals_Ground.ground_Top_Pos = Globals_GameArea.gameArea_H - 185;
+                //--------------------------------------
                 Globals_Levels.level_No_Lable_W = 30;
                 Globals_Levels.level_No_Lable_H = 20;
                 Globals_Levels.level_No_Lable_Left = Globals_GameArea.gameArea_W - 220;

@@ -15,18 +15,18 @@ namespace My_Flappy_Bird_C_Sharp_V2._A7_Collision
         private Collision_G obj_CG = new Collision_G();
         #endregion
         //--------------------------------------------------------------------------------------------------------------------------------------------------------
-        public bool does_Collison_With_Pipes_Happend(Image player)
+        public bool is_Collison_With_Any_Pipe_Detected()
         {
             //----
             foreach (Image i_Pipe in Globals_Pipes.li_Of_Pipes.ToList())
             {
                 //----
-                bool collision =
+                bool is_Colliding_With_Any_Pipe =
                     obj_CG.does_Collision_Happend(
-                        player,
+                        Globals_Player.img_Player,
                         i_Pipe);
                 //----
-                if (collision)
+                if (is_Colliding_With_Any_Pipe)
                 {
                     return true;
                 }
